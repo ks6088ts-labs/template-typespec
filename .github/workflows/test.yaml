@@ -1,0 +1,38 @@
+name: test
+
+on:
+  push:
+    branches:
+      - "main"
+      - "feature/**"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        platform:
+          - "ubuntu-latest"
+        node-version:
+          - "22.12.0"
+    runs-on: ${{ matrix.platform }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # to retrieve git tags
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run CI tests
+        shell: bash
+        run: |
+          make ci-test
+      - name: Upload output file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: schema
+          path: ./tsp-output/schema
+          retention-days: 1
