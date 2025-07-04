@@ -5,6 +5,7 @@ help:
 
 .PHONY: install-deps-dev
 install-deps-dev: ## install dependencies for development
+	@which kiota || echo "kiota is not installed. Please install it from https://aka.ms/kiota/docs"
 	npm install
 
 .PHONY: build
@@ -13,3 +14,16 @@ build: ## build applications
 
 .PHONY: ci-test
 ci-test: install-deps-dev build ## run CI test
+
+# ---
+# kiota
+# ---
+LANGUAGE ?= typescript
+
+.PHONY: kiota-generate
+kiota-generate: ## generate TypeSpec client code using Kiota
+	kiota generate \
+		--openapi ./outputs/schema/openapi.yaml \
+		--language $(LANGUAGE) \
+		--output ./outputs/kiota/$(LANGUAGE) \
+		--log-level None \
