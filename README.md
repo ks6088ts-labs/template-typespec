@@ -9,6 +9,7 @@ A GitHub template repository for TypeSpec
 - [Node 22.12.0+](https://nodejs.org/en/download)
 - [GNU Make](https://www.gnu.org/software/make/)
 - [TypeSpec](https://typespec.io/)
+- [Kiota](https://aka.ms/kiota/docs)
 
 ## Development instructions
 
