@@ -9,7 +9,7 @@ install-deps-dev: ## install dependencies for development
 
 .PHONY: build
 build: ## build applications
-	tsp compile .
+	npm run build
 
 .PHONY: ci-test
 ci-test: install-deps-dev build ## run CI test
